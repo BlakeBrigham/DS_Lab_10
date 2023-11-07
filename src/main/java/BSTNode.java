@@ -30,6 +30,8 @@ public class BSTNode<T extends Comparable<T>>
 
    /*
      Uses recursion to insert the target into the tree
+     
+     Add a node to the tree
     */
    public void insert(T target)
    {
@@ -39,6 +41,8 @@ public class BSTNode<T extends Comparable<T>>
    /*
      Uses recursion to retrieved the value target from the tree.  
      Returns null if it can't find the value.
+     
+     NOT POP, need to go through whole tree
     */
    public T retrieve(T target)
    {
@@ -49,6 +53,8 @@ public class BSTNode<T extends Comparable<T>>
     /**
        If it is present, what level is the node?
        If it is not present, what level would it be placed.
+       
+       Have to go down the whole tree and keep track of farthest depth reached
      */
    public int retrieveDepth(T target)
    {

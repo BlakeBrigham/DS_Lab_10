@@ -33,7 +33,7 @@ public class BSTree
 
 
     /**
-       returns the Integer if it is present in the tree
+       re)turns the Integer if it is present in the tree
        returns null if target is not in the tree.
      */
    public Integer retrieve(Integer target)
@@ -92,6 +92,8 @@ public class BSTree
        Your solution should have average time of Theta( log N)
 
        return null, if the tree is empty
+       
+       Go far right as far as possible
     */
    public Integer largest()
    {
