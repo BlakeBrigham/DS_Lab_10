@@ -11,8 +11,7 @@ public class BSTree
 
    public BSTree()
    {
-   
-       
+    root = null;   
    }
 
     /**
@@ -29,6 +28,14 @@ public class BSTree
      */
    public void insert(Integer target)
    {
+	   if (root == null)
+	   {
+		   root = new BSTNode<>(target, null, null);
+	   }
+	   else
+	   {
+		   root.insert(target);
+	   }
    }
 
 
@@ -38,7 +45,11 @@ public class BSTree
      */
    public Integer retrieve(Integer target)
    {
-	return null;
+	   if (root == null)
+	   {
+		   return null;
+	   }
+	   return root.retrieve(target);
    }
 
 
@@ -52,7 +63,14 @@ public class BSTree
      */
    public int retrieveDepth(Integer target)
    {
-	return 0;
+	   if (root == null)
+	   {
+		   return 0;
+	   }
+	   else
+	   {
+		   return root.retrieveDepth(target);
+	   }
        
    }
 
@@ -97,7 +115,14 @@ public class BSTree
     */
    public Integer largest()
    {
-	return null;
+	if (root == null)
+	{
+		return null;
+	}
+	else 
+	{
+		return root.getLargest();
+	}
    
    }
 
@@ -111,7 +136,7 @@ public class BSTree
    public List<Integer> toList()
    {
        
-      List<Integer> L= new ArrayList<Integer>();
+      List<Integer> L = new ArrayList<Integer>();
    
       if(root != null)
       {
@@ -121,7 +146,7 @@ public class BSTree
             {
                public void accept(Integer i)
                {
-               //need to add some code here...
+            	   L.add(i);
                }
             });
       }
@@ -138,7 +163,12 @@ public class BSTree
      */
    public int sum()
    {
-	return 0;
+	   int total = 0;
+	   for (Integer val:this.toList()) 
+	   {
+		   total += val.intValue();
+	   }
+	   return total;
    }
 
 
@@ -155,7 +185,22 @@ public class BSTree
      */
    public boolean myEquals(BSTree that)
    {
-	return false;
+	if (this.root == null && that.root == null)
+	{
+		return true;
+	}
+	else if (this.root == null)
+	{
+		return false;
+	}
+	else if (that.root == null)
+	{
+		return false;
+	}
+	else
+	{
+		return this.root.myEquals(that.root);
+	}
    
    }
 

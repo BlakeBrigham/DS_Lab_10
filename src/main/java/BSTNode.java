@@ -24,6 +24,9 @@ public class BSTNode<T extends Comparable<T>>
 
    public BSTNode(T val, BSTNode<T> l,BSTNode<T> r)
    {
+	   this.val = val;
+	   this.left = l;
+	   this.right = r;
    }
 
 
@@ -35,6 +38,28 @@ public class BSTNode<T extends Comparable<T>>
     */
    public void insert(T target)
    {
+	   if (this.val.compareTo(target) > 0)
+	   {
+		   if (this.left == null)
+		   {
+			   this.left = new BSTNode<>(target, null, null);
+		   }
+		   else
+		   {
+			   this.left.insert(target);
+		   }
+	   }
+	   else
+	   {
+		   if (this.right == null)
+		   {
+			   this.right = new BSTNode<>(target, null, null);
+		   }
+		   else
+		   {
+			   this.right.insert(target);
+		   }
+	   }
    }
 
 
@@ -46,7 +71,32 @@ public class BSTNode<T extends Comparable<T>>
     */
    public T retrieve(T target)
    {
-	return target;
+	   if (this.val.compareTo(target) > 0) // go left
+	   {
+		   if (this.left == null)
+		   {
+			   return null;
+		   }
+		   else
+		   {
+			   return this.left.retrieve(target);
+		   }
+	   }
+	   else if (this.val.compareTo(target) < 0) // go right
+	   {
+		   if (this.right == null)
+		   {
+			   return null;
+		   }
+		   else
+		   {
+			   return this.right.retrieve(target);
+		   }
+	   }
+	   else // found target
+	   {
+		   return target;
+	   }
    }
 
 
@@ -58,7 +108,32 @@ public class BSTNode<T extends Comparable<T>>
      */
    public int retrieveDepth(T target)
    {
-	return 0;
+	   if (this.val.compareTo(target) > 0) // go left
+	   {
+		   if (this.left == null)
+		   {
+			   return 1;
+		   }
+		   else
+		   {
+			   return this.left.retrieveDepth(target) + 1;
+		   }
+	   }
+	   else if (this.val.compareTo(target) < 0) // go right
+	   {
+		   if (this.right == null)
+		   {
+			   return 1;
+		   }
+		   else
+		   {
+			   return this.right.retrieveDepth(target) + 1;
+		   }
+	   }
+	   else // this.val == target
+	   {
+		   return 0;
+	   }
    }
 
    /**
@@ -66,7 +141,14 @@ public class BSTNode<T extends Comparable<T>>
     */
    public T getLargest()
    {
-	return null;
+	if (this.right == null)
+	{
+		return this.val;
+	}
+	else 
+	{
+		return this.right.getLargest();
+	}
    }
 
 
@@ -78,7 +160,19 @@ public class BSTNode<T extends Comparable<T>>
     */
    public void inOrderTraversal(Consumer<T> consume)
    {
-
+	   // Left
+	   if (this.left != null)
+	   {
+		   this.left.inOrderTraversal(consume);
+	   }
+	   // View
+	   consume.accept(this.val);
+	   // Right
+	   if (this.right != null)
+	   {
+		   this.right.inOrderTraversal(consume);
+	   }
+	   
    }
 
 
@@ -86,14 +180,38 @@ public class BSTNode<T extends Comparable<T>>
       returns true if this tree is equal to that tree.
       false otherwise.
 
-      Note: While I must always be non-null.  
+      Note: While "this" must always be non-null.  
             Nothing prevents "that" from being null.
 	    
 	    This one is long!
     */
    public boolean myEquals(BSTNode<T> that)
    {
-	return false;
+	   if (this.val == that.val)
+	   {
+		   boolean leftEquals = false;
+		   boolean rightEquals = false;
+		   if (this.left != null && that.left != null)
+		   {
+			   leftEquals = this.left.myEquals(that.left);
+		   }
+		   else if (this.left == null && that.left == null)
+		   {
+			   leftEquals = true;
+		   }
+		   
+		   if (this.right != null && that.right != null)
+		   {
+			   rightEquals = this.right.myEquals(that.right);
+		   }
+		   else if (this.right == null && that.right == null)
+		   {
+			   rightEquals = true;
+		   }
+		   
+		   return leftEquals && rightEquals;
+	   }
+	   return false;
    
 
    }

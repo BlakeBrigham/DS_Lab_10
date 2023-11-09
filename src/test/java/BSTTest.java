@@ -42,6 +42,7 @@ class BSTTest {
 		//isEmpty test
 		assertFalse(tree1.isEmpty());
 		//Retrieve test
+		
 		assertEquals(5, tree1.retrieve(a).intValue());
 		assertNull(tree1.retrieve(14));
 		
@@ -49,6 +50,7 @@ class BSTTest {
 		assertEquals(1, tree1.getSize());
 		
 		tree1.insert(b);
+		
 		assertEquals(2, tree1.getSize());
 		tree1.insert(c);
 		
@@ -67,6 +69,8 @@ class BSTTest {
 		
 		tree1.insert(e);
 		assertEquals(11, tree1.largest().intValue());
+		
+		
 		//Testing toList
 		List<Integer> templist = tree1.toList();
 		assertEquals(1, templist.get(0).intValue());
@@ -74,6 +78,7 @@ class BSTTest {
 		assertEquals(5, templist.get(2).intValue());
 		assertEquals(10, templist.get(3).intValue());
 		assertEquals(11, templist.get(4).intValue());
+		
 		
 		assertEquals(30, tree1.sum());
 		
